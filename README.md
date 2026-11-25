@@ -1,8 +1,5 @@
 # Financial_Transactions_Real_Time_Fraud_Detection_Pipeline
 
-
-# FinGuard – Real-Time Financial Transaction Monitoring & Fraud Detection
-
 An end-to-end real-time financial transaction monitoring and fraud detection platform built using Apache Kafka, Confluent Cloud, PySpark and Databricks Lakeflow Spark Declarative Pipelines.
 
 FinGuard ingests financial transactions and fraud watchlist data, processes them through a Bronze-Silver-Gold architecture, identifies suspicious activities and generates automated email alerts.
@@ -179,4 +176,4 @@ Jignesh Purabiya
 
 Data Engineer | PySpark | Apache Kafka | Databricks | SQL
 
-[LinkedIn](YOUR_LINKEDIN_URL) | [GitHub](YOUR_GITHUB_URL)
+[LinkedIn](linkedin.com/in/jignesh-purabia-a166971ba) | [GitHub](https://github.com/JigneshPurabiya26)
