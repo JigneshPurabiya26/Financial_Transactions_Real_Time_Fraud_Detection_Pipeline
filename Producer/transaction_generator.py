@@ -7,9 +7,9 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from fraud_engine import FraudEngine
-from models import Customer, Merchant, Transaction
-from utils import generate_id, utc_now_iso
+from Producer.fraud_engine import FraudEngine
+from Producer.models import Customer, Merchant, Transaction
+from Producer.utils import generate_id, utc_now_iso
 
 
 class TransactionGenerator:

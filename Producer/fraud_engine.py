@@ -5,7 +5,7 @@ from collections import deque
 from datetime import datetime, timedelta
 from typing import Deque
 
-from models import Transaction
+from Producer.models import Transaction
 
 
 class FraudEngine:

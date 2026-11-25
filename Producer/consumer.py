@@ -7,7 +7,7 @@ from typing import Any
 
 from confluent_kafka import Consumer, KafkaException
 
-from config import load_settings
+from Producer.config import load_settings
 
 logging.basicConfig(
     level=logging.INFO,

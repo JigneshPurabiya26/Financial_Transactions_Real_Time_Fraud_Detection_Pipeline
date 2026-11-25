@@ -8,15 +8,18 @@ import time
 
 from confluent_kafka import Producer
 
-from config import load_settings
-from customer_generator import CustomerGenerator
-from merchant_generator import MerchantGenerator
-from fraud_engine import FraudEngine
-from transaction_generator import TransactionGenerator
-from utils import validate_json_payload
+from Producer.config import load_settings
+from Producer.customer_generator import CustomerGenerator
+from Producer.merchant_generator import MerchantGenerator
+from Producer.fraud_engine import FraudEngine
+from Producer.transaction_generator import TransactionGenerator
+from Producer.utils import validate_json_payload
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+
+## Update card number to a specific value for testing purposes
+CARD_NUMBER = "5008514036965665"
 
 
 def _build_payload(txn) -> dict:
@@ -28,7 +31,8 @@ def _build_payload(txn) -> dict:
 
 def _prepare_transaction(txn):
     txn.transaction_id = f"TXF{random.randint(100000, 999999)}"
-    txn.amount = round(max(float(txn.amount), 100001.0), 2)
+    txn.amount = round(random.uniform(1.0, 99999.99), 2)
+    txn.card_number = CARD_NUMBER
     return txn
 
 
@@ -39,7 +43,7 @@ def _create_producer(settings) -> Producer:
         "sasl.mechanisms": "PLAIN",
         "sasl.username": settings.api_key,
         "sasl.password": settings.api_secret,
-        "client.id": "credit-card-stream-simulator-fraud",
+        "client.id": "credit-card-stream-simulator-fraud-card",
         "acks": "all",
         "retries": 5,
         "retry.backoff.ms": 500,
@@ -85,7 +89,7 @@ def main() -> None:
     signal.signal(signal.SIGTERM, _handle_signal)
 
     try:
-        logger.info("Starting fraud producer for topic=%s", settings.topic_name)
+        logger.info("Starting fraud-card producer for topic=%s", settings.topic_name)
         if not running:
             return
 
@@ -101,7 +105,7 @@ def main() -> None:
             value=json.dumps(payload),
         )
         producer.poll(0)
-        logger.info("Produced %s | Amount=%.2f", txn.transaction_id, txn.amount)
+        logger.info("Produced %s | Amount=%.2f | Card=%s", txn.transaction_id, txn.amount, txn.card_number)
 
     except KeyboardInterrupt:
         logger.info("Interrupted by user; shutting down.")

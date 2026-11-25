@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 from faker import Faker
 
-from models import Customer
-from utils import ensure_parent_dir, generate_id
+from Producer.models import Customer
+from Producer.utils import ensure_parent_dir, generate_id
 
 
 class CustomerGenerator:

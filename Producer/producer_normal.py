@@ -9,12 +9,12 @@ from pathlib import Path
 
 from confluent_kafka import Producer
 
-from config import Settings, load_settings
-from customer_generator import CustomerGenerator
-from merchant_generator import MerchantGenerator
-from fraud_engine import FraudEngine
-from transaction_generator import TransactionGenerator
-from utils import validate_json_payload
+from Producer.config import Settings, load_settings
+from Producer.customer_generator import CustomerGenerator
+from Producer.merchant_generator import MerchantGenerator
+from Producer.fraud_engine import FraudEngine
+from Producer.transaction_generator import TransactionGenerator
+from Producer.utils import validate_json_payload
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
